@@ -1,0 +1,122 @@
+{
+  "$defs": {
+    "DeterminationOutcome": {
+      "enum": [
+        "APPROVED",
+        "PARTIALLY_APPROVED",
+        "DENIED",
+        "WITHDRAWN"
+      ],
+      "title": "DeterminationOutcome",
+      "type": "string"
+    },
+    "Role": {
+      "enum": [
+        "intake",
+        "nurse_reviewer",
+        "physician_reviewer",
+        "pharmacist_reviewer",
+        "supervisor",
+        "auditor",
+        "admin"
+      ],
+      "title": "Role",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "outcome": {
+      "$ref": "#/$defs/DeterminationOutcome"
+    },
+    "approved_quantity": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Approved Quantity"
+    },
+    "approved_duration_days": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Approved Duration Days"
+    },
+    "reviewer_id": {
+      "title": "Reviewer Id",
+      "type": "string"
+    },
+    "reviewer_role": {
+      "$ref": "#/$defs/Role"
+    },
+    "specific_reason_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Specific Reason Code"
+    },
+    "plain_language_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Plain Language Reason"
+    },
+    "criteria_cited": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Criteria Cited",
+      "type": "array"
+    },
+    "override_of_recommendation": {
+      "default": false,
+      "title": "Override Of Recommendation",
+      "type": "boolean"
+    },
+    "override_rationale": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Override Rationale"
+    }
+  },
+  "required": [
+    "outcome",
+    "reviewer_id",
+    "reviewer_role"
+  ],
+  "title": "Determination",
+  "type": "object"
+}

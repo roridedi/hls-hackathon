@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "CriterionResult": {
+      "additionalProperties": false,
+      "properties": {
+        "criterion_id": {
+          "title": "Criterion Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/CriterionStatus"
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "criterion_id",
+        "status",
+        "rationale"
+      ],
+      "title": "CriterionResult",
+      "type": "object"
+    },
+    "CriterionStatus": {
+      "enum": [
+        "MET",
+        "NOT_MET",
+        "UNKNOWN"
+      ],
+      "title": "CriterionStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "results": {
+      "items": {
+        "$ref": "#/$defs/CriterionResult"
+      },
+      "title": "Results",
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "title": "CriteriaMappingOutput",
+  "type": "object"
+}

@@ -1,0 +1,23 @@
+criteria_set_id: glp1_t2d
+version: "2026.1"
+applies_to:
+  line: PHARMACY
+  codes: {system: RXNORM_CLASS, values: [GLP1]}
+auto_approve_eligible: true
+criteria:
+  - id: dx_t2d
+    description: Synthetic criterion. Diagnosis of type 2 diabetes.
+    question: Please provide the diagnosis code and documentation confirming type 2 diabetes.
+    rule: {any_evidence: {fact_type: diagnosis, code_prefix: E11}}
+  - id: a1c_threshold
+    description: Synthetic criterion. A1C at or above 7.0 percent within 180 days.
+    question: Please provide the A1C value, unit, collection date, and source report from the past 180 days.
+    rule: {evidence_value: {fact_type: lab_a1c, op: gte, value: 7.0, within_days: 180}}
+  - id: metformin_trial
+    description: Synthetic criterion. Metformin trial of at least 90 days or a documented contraindication.
+    question: Please provide metformin trial dates and duration, or a documented contraindication to metformin.
+    rule:
+      any_of:
+        - {therapy_duration: {drug_class: BIGUANIDE, min_days: 90}}
+        - {any_evidence: {fact_type: contraindication, target: metformin}}
+logic: {all_of: [dx_t2d, a1c_threshold, metformin_trial]}

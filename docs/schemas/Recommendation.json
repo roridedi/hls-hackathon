@@ -1,0 +1,122 @@
+{
+  "$defs": {
+    "AgentOutcome": {
+      "enum": [
+        "APPROVE_RECOMMENDED",
+        "PEND_CLINICAL_REVIEW",
+        "PEND_MISSING_INFO"
+      ],
+      "title": "AgentOutcome",
+      "type": "string"
+    },
+    "Confidence": {
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "ConfidenceComponents": {
+      "additionalProperties": false,
+      "properties": {
+        "all_required_met": {
+          "title": "All Required Met",
+          "type": "boolean"
+        },
+        "verified_evidence_count": {
+          "minimum": 0,
+          "title": "Verified Evidence Count",
+          "type": "integer"
+        },
+        "contradiction_count": {
+          "minimum": 0,
+          "title": "Contradiction Count",
+          "type": "integer"
+        },
+        "unstructured_source_count": {
+          "minimum": 0,
+          "title": "Unstructured Source Count",
+          "type": "integer"
+        },
+        "min_extraction_score": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Min Extraction Score",
+          "type": "number"
+        },
+        "clinical_judgment_required": {
+          "default": false,
+          "title": "Clinical Judgment Required",
+          "type": "boolean"
+        },
+        "agent_failed": {
+          "default": false,
+          "title": "Agent Failed",
+          "type": "boolean"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "all_required_met",
+        "verified_evidence_count",
+        "contradiction_count",
+        "unstructured_source_count",
+        "min_extraction_score",
+        "explanation"
+      ],
+      "title": "ConfidenceComponents",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "outcome": {
+      "$ref": "#/$defs/AgentOutcome"
+    },
+    "confidence": {
+      "$ref": "#/$defs/Confidence"
+    },
+    "components": {
+      "$ref": "#/$defs/ConfidenceComponents"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reasons",
+      "type": "array"
+    },
+    "open_questions": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Open Questions",
+      "type": "array"
+    },
+    "routing_queue": {
+      "enum": [
+        "nurse",
+        "physician",
+        "administrative"
+      ],
+      "title": "Routing Queue",
+      "type": "string"
+    }
+  },
+  "required": [
+    "outcome",
+    "confidence",
+    "components",
+    "reasons",
+    "routing_queue"
+  ],
+  "title": "Recommendation",
+  "type": "object"
+}

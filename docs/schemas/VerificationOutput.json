@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "Contradiction": {
+      "additionalProperties": false,
+      "properties": {
+        "fact_type": {
+          "title": "Fact Type",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fact_type",
+        "evidence_ids",
+        "description"
+      ],
+      "title": "Contradiction",
+      "type": "object"
+    },
+    "VerificationCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "supported": {
+          "title": "Supported",
+          "type": "boolean"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "supported",
+        "note"
+      ],
+      "title": "VerificationCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/VerificationCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "contradictions": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Contradiction"
+      },
+      "title": "Contradictions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "checks"
+  ],
+  "title": "VerificationOutput",
+  "type": "object"
+}

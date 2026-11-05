@@ -1,0 +1,318 @@
+{
+  "$defs": {
+    "Channel": {
+      "enum": [
+        "FHIR",
+        "X12",
+        "NCPDP",
+        "FAX"
+      ],
+      "title": "Channel",
+      "type": "string"
+    },
+    "Clock": {
+      "additionalProperties": false,
+      "properties": {
+        "due_at": {
+          "format": "date-time",
+          "title": "Due At",
+          "type": "string"
+        },
+        "percent_elapsed": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Percent Elapsed",
+          "type": "number"
+        },
+        "paused": {
+          "default": false,
+          "title": "Paused",
+          "type": "boolean"
+        },
+        "sla_hours": {
+          "exclusiveMinimum": 0,
+          "title": "Sla Hours",
+          "type": "number"
+        },
+        "pause_started_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pause Started At"
+        },
+        "total_paused_seconds": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Total Paused Seconds",
+          "type": "number"
+        },
+        "warning_emitted": {
+          "default": false,
+          "title": "Warning Emitted",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "due_at",
+        "sla_hours"
+      ],
+      "title": "Clock",
+      "type": "object"
+    },
+    "DocumentRef": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "media_type": {
+          "enum": [
+            "text/plain",
+            "application/pdf",
+            "application/fhir+json"
+          ],
+          "title": "Media Type",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "page_count": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Page Count",
+          "type": "integer"
+        },
+        "storage_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Storage Key"
+        }
+      },
+      "required": [
+        "document_id",
+        "media_type",
+        "sha256"
+      ],
+      "title": "DocumentRef",
+      "type": "object"
+    },
+    "LineOfBusiness": {
+      "enum": [
+        "PHARMACY",
+        "MEDICAL"
+      ],
+      "title": "LineOfBusiness",
+      "type": "string"
+    },
+    "Provider": {
+      "additionalProperties": false,
+      "properties": {
+        "npi": {
+          "pattern": "^\\d{10}$",
+          "title": "Npi",
+          "type": "string"
+        },
+        "specialty": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Specialty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "npi",
+        "specialty"
+      ],
+      "title": "Provider",
+      "type": "object"
+    },
+    "Service": {
+      "additionalProperties": false,
+      "properties": {
+        "code_system": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Code System",
+          "type": "string"
+        },
+        "code": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "quantity": {
+          "default": 1,
+          "exclusiveMinimum": 0,
+          "title": "Quantity",
+          "type": "number"
+        },
+        "days_supply": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Days Supply"
+        },
+        "place_of_service": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Place Of Service"
+        }
+      },
+      "required": [
+        "code_system",
+        "code"
+      ],
+      "title": "Service",
+      "type": "object"
+    },
+    "Status": {
+      "enum": [
+        "RECEIVED",
+        "NORMALIZED",
+        "ADMIN_CHECK",
+        "NO_PA_REQUIRED",
+        "ADMIN_PEND",
+        "DOCS_CHECK",
+        "PEND_MISSING_INFO",
+        "CLINICAL_ANALYSIS",
+        "VERIFICATION",
+        "RECOMMENDED",
+        "AUTO_APPROVED",
+        "IN_CLINICAL_REVIEW",
+        "IN_PHYSICIAN_REVIEW",
+        "PEER_TO_PEER_SCHEDULED",
+        "DETERMINED",
+        "NOTIFICATION_PENDING_APPROVAL",
+        "NOTIFIED",
+        "CLOSED",
+        "WITHDRAWN"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "Urgency": {
+      "enum": [
+        "EXPEDITED",
+        "STANDARD"
+      ],
+      "title": "Urgency",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "format": "uuid",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "channel": {
+      "$ref": "#/$defs/Channel"
+    },
+    "line_of_business": {
+      "$ref": "#/$defs/LineOfBusiness"
+    },
+    "urgency": {
+      "$ref": "#/$defs/Urgency"
+    },
+    "received_at": {
+      "format": "date-time",
+      "title": "Received At",
+      "type": "string"
+    },
+    "member_token": {
+      "pattern": "^(member_|tok_)[A-Za-z0-9_]{3,100}$",
+      "title": "Member Token",
+      "type": "string"
+    },
+    "jurisdiction": {
+      "default": "DEFAULT",
+      "maxLength": 30,
+      "minLength": 1,
+      "title": "Jurisdiction",
+      "type": "string"
+    },
+    "date_of_service": {
+      "format": "date",
+      "title": "Date Of Service",
+      "type": "string"
+    },
+    "requesting_provider": {
+      "$ref": "#/$defs/Provider"
+    },
+    "service": {
+      "$ref": "#/$defs/Service"
+    },
+    "diagnoses": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Diagnoses",
+      "type": "array"
+    },
+    "attachments": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DocumentRef"
+      },
+      "title": "Attachments",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/Status",
+      "default": "RECEIVED"
+    },
+    "clock": {
+      "$ref": "#/$defs/Clock"
+    }
+  },
+  "required": [
+    "channel",
+    "line_of_business",
+    "urgency",
+    "received_at",
+    "member_token",
+    "date_of_service",
+    "requesting_provider",
+    "service",
+    "clock"
+  ],
+  "title": "UMCase",
+  "type": "object"
+}

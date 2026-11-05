@@ -1,0 +1,23 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "advisory_only": {
+      "const": true,
+      "default": true,
+      "title": "Advisory Only",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "findings"
+  ],
+  "title": "InsightsOutput",
+  "type": "object"
+}

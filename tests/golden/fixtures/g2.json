@@ -1,0 +1,40 @@
+{
+  "scenario": "G2",
+  "expected": "PEND_MISSING_INFO",
+  "request": {
+    "channel": "NCPDP",
+    "line_of_business": "PHARMACY",
+    "received_at": "2026-10-30T21:00:00Z",
+    "jurisdiction": "DEFAULT",
+    "payload": {
+      "standard": "SCRIPT_2017071",
+      "patient_token": "member_000001",
+      "service_date": "2026-11-01",
+      "expedited": false,
+      "prescriber": {
+        "npi": "1234567893",
+        "specialty": "Primary care"
+      },
+      "medication": {
+        "code_system": "RXNORM_CLASS",
+        "code": "GLP1_WEIGHT",
+        "quantity": 1.0,
+        "days_supply": 30,
+        "place_of_service": null
+      },
+      "diagnoses": [
+        "E66.9"
+      ]
+    },
+    "sources": [
+      {
+        "source_id": "g2_note",
+        "source_type": "DOCUMENT",
+        "pages": [
+          "Synthetic clinical record.\nDiagnosis: E66.9\nBMI: 34.0 kg/m2; date: 2026-10-01\n"
+        ],
+        "resource": null
+      }
+    ]
+  }
+}

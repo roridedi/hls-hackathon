@@ -1,0 +1,118 @@
+{
+  "scenario": "G5",
+  "expected": "APPROVE_RECOMMENDED",
+  "request": {
+    "channel": "FHIR",
+    "line_of_business": "MEDICAL",
+    "received_at": "2026-10-30T21:00:00Z",
+    "jurisdiction": "DEFAULT",
+    "payload": {
+      "resourceType": "Bundle",
+      "type": "collection",
+      "entry": [
+        {
+          "resource": {
+            "resourceType": "Patient",
+            "id": "synthetic-patient",
+            "identifier": [
+              {
+                "system": "urn:um:member-token",
+                "value": "member_000001"
+              }
+            ]
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Practitioner",
+            "id": "synthetic-provider",
+            "identifier": [
+              {
+                "system": "http://hl7.org/fhir/sid/us-npi",
+                "value": "1234567893"
+              }
+            ]
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Claim",
+            "id": "synthetic-request",
+            "status": "active",
+            "type": {
+              "coding": [
+                {
+                  "code": "professional"
+                }
+              ]
+            },
+            "use": "preauthorization",
+            "patient": {
+              "reference": "Patient/synthetic-patient"
+            },
+            "created": "2026-10-30",
+            "provider": {
+              "reference": "Practitioner/synthetic-provider"
+            },
+            "priority": {
+              "coding": [
+                {
+                  "code": "normal"
+                }
+              ]
+            },
+            "insurance": [
+              {
+                "sequence": 1,
+                "focal": true,
+                "coverage": {
+                  "reference": "Coverage/synthetic-coverage"
+                }
+              }
+            ],
+            "diagnosis": [
+              {
+                "sequence": 1,
+                "diagnosisCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                      "code": "M54.50"
+                    }
+                  ]
+                }
+              }
+            ],
+            "item": [
+              {
+                "sequence": 1,
+                "productOrService": {
+                  "coding": [
+                    {
+                      "system": "CPT",
+                      "code": "72148"
+                    }
+                  ]
+                },
+                "servicedDate": "2026-11-01",
+                "quantity": {
+                  "value": 1.0
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "sources": [
+      {
+        "source_id": "g5_note",
+        "source_type": "DOCUMENT",
+        "pages": [
+          "Synthetic clinical record.\nDiagnosis: M54.50\nBack pain duration: 21 days; date: 2026-10-01\nNeurologic deficit: yes; date: 2026-10-01\n"
+        ],
+        "resource": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "member_token": "member_000001",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000002",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000003",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000004",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000005",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000006",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000007",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000008",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000009",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000010",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": false
+  },
+  {
+    "member_token": "member_000011",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000012",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000013",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000014",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000015",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000016",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000017",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000018",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000019",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": true
+  },
+  {
+    "member_token": "member_000020",
+    "coverage_start": "2026-01-01",
+    "coverage_end": "2026-12-31",
+    "eligible": false
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "clock_policies": {
+    "PHARMACY:DEFAULT": {
+      "standard_hours": 168,
+      "expedited_hours": 72,
+      "pause_for_missing_info": false,
+      "warning_fraction": 0.75
+    },
+    "MEDICAL:DEFAULT": {
+      "standard_hours": 168,
+      "expedited_hours": 72,
+      "pause_for_missing_info": false,
+      "warning_fraction": 0.75
+    }
+  },
+  "auto_approve_enabled": {"PHARMACY": false, "MEDICAL": false},
+  "adverse_reviewer_roles": ["physician_reviewer"],
+  "agent_timeout_seconds": 30,
+  "agent_token_budget": 4096,
+  "agent_budgets": {},
+  "extraction_score_threshold": 0.9,
+  "approval_removal_threshold": 0.95,
+  "meaningful_volume": 100,
+  "review_cost_estimate": 25,
+  "appeal_rights": "You may ask for an appeal. Contact the plan using the number on your member card. You can send more records and ask for a fast review if a delay could harm your health. Your plan will explain the filing deadline and review process.",
+  "dev_accounts": {
+    "dev-intake": {"actor_id": "synthetic-intake", "roles": ["intake"]},
+    "dev-nurse": {"actor_id": "synthetic-nurse", "roles": ["nurse_reviewer"]},
+    "dev-physician": {"actor_id": "synthetic-physician", "roles": ["physician_reviewer"]},
+    "dev-pharmacist": {"actor_id": "synthetic-pharmacist", "roles": ["pharmacist_reviewer"]},
+    "dev-supervisor": {"actor_id": "synthetic-supervisor", "roles": ["supervisor"]},
+    "dev-auditor": {"actor_id": "synthetic-auditor", "roles": ["auditor"]},
+    "dev-admin": {"actor_id": "synthetic-admin", "roles": ["admin"]}
+  }
+}

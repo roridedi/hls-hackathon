@@ -1,0 +1,231 @@
+{
+  "$defs": {
+    "EvidenceSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "fact_type": {
+          "title": "Fact Type",
+          "type": "string"
+        },
+        "code_prefix": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Code Prefix"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        }
+      },
+      "required": [
+        "fact_type"
+      ],
+      "title": "EvidenceSelector",
+      "type": "object"
+    },
+    "Rule": {
+      "additionalProperties": false,
+      "properties": {
+        "any_evidence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EvidenceSelector"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "evidence_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ValueRule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "therapy_duration": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TherapyRule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "any_of": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Rule"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Any Of"
+        },
+        "all_of": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Rule"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "All Of"
+        }
+      },
+      "title": "Rule",
+      "type": "object"
+    },
+    "TherapyRule": {
+      "additionalProperties": false,
+      "properties": {
+        "drug_class": {
+          "title": "Drug Class",
+          "type": "string"
+        },
+        "min_days": {
+          "minimum": 1,
+          "title": "Min Days",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "drug_class",
+        "min_days"
+      ],
+      "title": "TherapyRule",
+      "type": "object"
+    },
+    "ValueRule": {
+      "additionalProperties": false,
+      "properties": {
+        "fact_type": {
+          "title": "Fact Type",
+          "type": "string"
+        },
+        "op": {
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        },
+        "within_days": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Within Days"
+        }
+      },
+      "required": [
+        "fact_type",
+        "op",
+        "value"
+      ],
+      "title": "ValueRule",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "rule": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Rule"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "requires_clinical_judgment": {
+      "default": false,
+      "title": "Requires Clinical Judgment",
+      "type": "boolean"
+    },
+    "question": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Question"
+    }
+  },
+  "required": [
+    "id",
+    "description"
+  ],
+  "title": "Criterion",
+  "type": "object"
+}

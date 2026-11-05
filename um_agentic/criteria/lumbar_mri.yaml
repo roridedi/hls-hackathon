@@ -1,0 +1,15 @@
+criteria_set_id: lumbar_mri
+version: "2026.1"
+applies_to:
+  line: MEDICAL
+  codes: {system: CPT, values: ["72148"]}
+auto_approve_eligible: false
+criteria:
+  - id: mri_indication
+    description: Synthetic criterion. Neurologic deficit or symptoms lasting at least six weeks.
+    question: Please provide the symptom duration and examination findings, including any neurologic deficit.
+    rule:
+      any_of:
+        - {evidence_value: {fact_type: neurologic_deficit, op: eq, value: true}}
+        - {evidence_value: {fact_type: back_pain_duration, op: gte, value: 42}}
+logic: {all_of: [mri_indication]}

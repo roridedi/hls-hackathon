@@ -1,0 +1,50 @@
+{
+  "$defs": {
+    "DTRQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "criterion_id": {
+          "title": "Criterion Id",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "answer_type": {
+          "default": "text",
+          "enum": [
+            "text",
+            "date",
+            "number",
+            "boolean"
+          ],
+          "title": "Answer Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "criterion_id",
+        "text"
+      ],
+      "title": "DTRQuestion",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "questions": {
+      "items": {
+        "$ref": "#/$defs/DTRQuestion"
+      },
+      "title": "Questions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "questions"
+  ],
+  "title": "DocumentationOutput",
+  "type": "object"
+}

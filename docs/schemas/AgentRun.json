@@ -1,0 +1,163 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "format": "uuid",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "case_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Case Id"
+    },
+    "agent": {
+      "title": "Agent",
+      "type": "string"
+    },
+    "model_id": {
+      "title": "Model Id",
+      "type": "string"
+    },
+    "prompt_version": {
+      "title": "Prompt Version",
+      "type": "string"
+    },
+    "prompt_hash": {
+      "title": "Prompt Hash",
+      "type": "string"
+    },
+    "prompt_text": {
+      "default": "",
+      "title": "Prompt Text",
+      "type": "string"
+    },
+    "criteria_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Criteria Version"
+    },
+    "inputs_hash": {
+      "title": "Inputs Hash",
+      "type": "string"
+    },
+    "inputs": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Inputs",
+      "type": "object"
+    },
+    "outputs": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Outputs"
+    },
+    "outputs_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Outputs Hash"
+    },
+    "raw_outputs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Raw Outputs",
+      "type": "array"
+    },
+    "responses": {
+      "default": [],
+      "items": {
+        "additionalProperties": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "type": "object"
+      },
+      "title": "Responses",
+      "type": "array"
+    },
+    "latency_ms": {
+      "minimum": 0,
+      "title": "Latency Ms",
+      "type": "number"
+    },
+    "input_tokens": {
+      "minimum": 0,
+      "title": "Input Tokens",
+      "type": "integer"
+    },
+    "output_tokens": {
+      "minimum": 0,
+      "title": "Output Tokens",
+      "type": "integer"
+    },
+    "attempts": {
+      "maximum": 2,
+      "minimum": 1,
+      "title": "Attempts",
+      "type": "integer"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    }
+  },
+  "required": [
+    "case_id",
+    "agent",
+    "model_id",
+    "prompt_version",
+    "prompt_hash",
+    "criteria_version",
+    "inputs_hash",
+    "inputs",
+    "outputs",
+    "outputs_hash",
+    "latency_ms",
+    "input_tokens",
+    "output_tokens",
+    "attempts"
+  ],
+  "title": "AgentRun",
+  "type": "object"
+}

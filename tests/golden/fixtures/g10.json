@@ -1,0 +1,142 @@
+{
+  "scenario": "G10",
+  "expected": "APPROVE_RECOMMENDED",
+  "request": {
+    "channel": "FHIR",
+    "line_of_business": "PHARMACY",
+    "received_at": "2026-10-30T21:00:00Z",
+    "jurisdiction": "DEFAULT",
+    "payload": {
+      "resourceType": "Bundle",
+      "type": "collection",
+      "entry": [
+        {
+          "resource": {
+            "resourceType": "Patient",
+            "id": "synthetic-patient",
+            "identifier": [
+              {
+                "system": "urn:um:member-token",
+                "value": "member_000001"
+              }
+            ]
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Practitioner",
+            "id": "synthetic-provider",
+            "identifier": [
+              {
+                "system": "http://hl7.org/fhir/sid/us-npi",
+                "value": "1234567893"
+              }
+            ]
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Claim",
+            "id": "synthetic-request",
+            "status": "active",
+            "type": {
+              "coding": [
+                {
+                  "code": "professional"
+                }
+              ]
+            },
+            "use": "preauthorization",
+            "patient": {
+              "reference": "Patient/synthetic-patient"
+            },
+            "created": "2026-10-30",
+            "provider": {
+              "reference": "Practitioner/synthetic-provider"
+            },
+            "priority": {
+              "coding": [
+                {
+                  "code": "normal"
+                }
+              ]
+            },
+            "insurance": [
+              {
+                "sequence": 1,
+                "focal": true,
+                "coverage": {
+                  "reference": "Coverage/synthetic-coverage"
+                }
+              }
+            ],
+            "diagnosis": [
+              {
+                "sequence": 1,
+                "diagnosisCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                      "code": "E11.9"
+                    }
+                  ]
+                }
+              }
+            ],
+            "item": [
+              {
+                "sequence": 1,
+                "productOrService": {
+                  "coding": [
+                    {
+                      "system": "RXNORM_CLASS",
+                      "code": "GLP1"
+                    }
+                  ]
+                },
+                "servicedDate": "2026-11-01",
+                "quantity": {
+                  "value": 1.0
+                },
+                "extension": [
+                  {
+                    "url": "urn:um:days-supply",
+                    "valuePositiveInt": 30
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "sources": [
+      {
+        "source_id": "g10_note",
+        "source_type": "DOCUMENT",
+        "pages": [
+          "Synthetic clinical record. No real patient.\nDiagnosis: E11.9\nA1C: 8.2 %; date: 2026-10-01\nMetformin trial: 120 days; date: 2026-10-01\n"
+        ],
+        "resource": null
+      },
+      {
+        "source_id": "claims_history",
+        "source_type": "CLAIMS",
+        "pages": [],
+        "resource": {
+          "facts": [
+            {
+              "fact_type": "therapy_duration",
+              "normalized_value": {
+                "drug_class": "BIGUANIDE",
+                "days": 120
+              },
+              "effective_date": "2026-10-01",
+              "unit": "days"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

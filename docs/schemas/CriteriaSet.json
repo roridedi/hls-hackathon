@@ -1,0 +1,358 @@
+{
+  "$defs": {
+    "AppliesTo": {
+      "additionalProperties": false,
+      "properties": {
+        "line": {
+          "$ref": "#/$defs/LineOfBusiness"
+        },
+        "codes": {
+          "$ref": "#/$defs/CodeSelection"
+        }
+      },
+      "required": [
+        "line",
+        "codes"
+      ],
+      "title": "AppliesTo",
+      "type": "object"
+    },
+    "CodeSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "system": {
+          "title": "System",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "system",
+        "values"
+      ],
+      "title": "CodeSelection",
+      "type": "object"
+    },
+    "CriteriaLogic": {
+      "additionalProperties": false,
+      "properties": {
+        "all_of": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "All Of"
+        },
+        "any_of": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Any Of"
+        }
+      },
+      "title": "CriteriaLogic",
+      "type": "object"
+    },
+    "Criterion": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "rule": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Rule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requires_clinical_judgment": {
+          "default": false,
+          "title": "Requires Clinical Judgment",
+          "type": "boolean"
+        },
+        "question": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Question"
+        }
+      },
+      "required": [
+        "id",
+        "description"
+      ],
+      "title": "Criterion",
+      "type": "object"
+    },
+    "EvidenceSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "fact_type": {
+          "title": "Fact Type",
+          "type": "string"
+        },
+        "code_prefix": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Code Prefix"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        }
+      },
+      "required": [
+        "fact_type"
+      ],
+      "title": "EvidenceSelector",
+      "type": "object"
+    },
+    "LineOfBusiness": {
+      "enum": [
+        "PHARMACY",
+        "MEDICAL"
+      ],
+      "title": "LineOfBusiness",
+      "type": "string"
+    },
+    "Rule": {
+      "additionalProperties": false,
+      "properties": {
+        "any_evidence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EvidenceSelector"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "evidence_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ValueRule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "therapy_duration": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TherapyRule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "any_of": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Rule"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Any Of"
+        },
+        "all_of": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Rule"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "All Of"
+        }
+      },
+      "title": "Rule",
+      "type": "object"
+    },
+    "TherapyRule": {
+      "additionalProperties": false,
+      "properties": {
+        "drug_class": {
+          "title": "Drug Class",
+          "type": "string"
+        },
+        "min_days": {
+          "minimum": 1,
+          "title": "Min Days",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "drug_class",
+        "min_days"
+      ],
+      "title": "TherapyRule",
+      "type": "object"
+    },
+    "ValueRule": {
+      "additionalProperties": false,
+      "properties": {
+        "fact_type": {
+          "title": "Fact Type",
+          "type": "string"
+        },
+        "op": {
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        },
+        "within_days": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Within Days"
+        }
+      },
+      "required": [
+        "fact_type",
+        "op",
+        "value"
+      ],
+      "title": "ValueRule",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "criteria_set_id": {
+      "title": "Criteria Set Id",
+      "type": "string"
+    },
+    "version": {
+      "pattern": "^\\d{4}\\.\\d+$",
+      "title": "Version",
+      "type": "string"
+    },
+    "applies_to": {
+      "$ref": "#/$defs/AppliesTo"
+    },
+    "auto_approve_eligible": {
+      "default": false,
+      "title": "Auto Approve Eligible",
+      "type": "boolean"
+    },
+    "criteria": {
+      "items": {
+        "$ref": "#/$defs/Criterion"
+      },
+      "minItems": 1,
+      "title": "Criteria",
+      "type": "array"
+    },
+    "logic": {
+      "$ref": "#/$defs/CriteriaLogic"
+    }
+  },
+  "required": [
+    "criteria_set_id",
+    "version",
+    "applies_to",
+    "criteria",
+    "logic"
+  ],
+  "title": "CriteriaSet",
+  "type": "object"
+}

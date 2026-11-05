@@ -1,0 +1,24 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "member_text": {
+      "title": "Member Text",
+      "type": "string"
+    },
+    "provider_text": {
+      "title": "Provider Text",
+      "type": "string"
+    },
+    "language": {
+      "default": "en",
+      "title": "Language",
+      "type": "string"
+    }
+  },
+  "required": [
+    "member_text",
+    "provider_text"
+  ],
+  "title": "LetterDraftOutput",
+  "type": "object"
+}

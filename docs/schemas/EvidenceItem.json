@@ -1,0 +1,167 @@
+{
+  "$defs": {
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "source_type": {
+          "$ref": "#/$defs/SourceType"
+        },
+        "source_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "char_start": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Char Start"
+        },
+        "char_end": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Char End"
+        },
+        "resource_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resource Path"
+        }
+      },
+      "required": [
+        "source_type",
+        "source_id"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "SourceType": {
+      "enum": [
+        "DOCUMENT",
+        "FHIR",
+        "CLAIMS"
+      ],
+      "title": "SourceType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "evidence_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "fact_type": {
+      "pattern": "^[a-z][a-z0-9_]{0,80}$",
+      "title": "Fact Type",
+      "type": "string"
+    },
+    "normalized_value": {
+      "$ref": "#/$defs/JsonValue"
+    },
+    "unit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unit"
+    },
+    "effective_date": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Effective Date"
+    },
+    "citation": {
+      "$ref": "#/$defs/Citation"
+    },
+    "extracted_by": {
+      "title": "Extracted By",
+      "type": "string"
+    },
+    "verified": {
+      "default": false,
+      "title": "Verified",
+      "type": "boolean"
+    },
+    "verifier_note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verifier Note"
+    },
+    "extraction_score": {
+      "default": 1,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Extraction Score",
+      "type": "number"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "fact_type",
+    "normalized_value",
+    "citation",
+    "extracted_by"
+  ],
+  "title": "EvidenceItem",
+  "type": "object"
+}

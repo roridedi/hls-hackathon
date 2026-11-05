@@ -1,0 +1,41 @@
+{
+  "scenario": "G4",
+  "expected": "PEND_CLINICAL_REVIEW",
+  "request": {
+    "channel": "FAX",
+    "line_of_business": "MEDICAL",
+    "received_at": "2026-10-30T21:00:00Z",
+    "jurisdiction": "DEFAULT",
+    "payload": {
+      "fields": {
+        "member_token": "member_000001",
+        "date_of_service": "2026-11-01",
+        "urgency": "STANDARD",
+        "requesting_provider": {
+          "npi": "1234567893",
+          "specialty": "Primary care"
+        },
+        "service": {
+          "code_system": "CPT",
+          "code": "72148",
+          "quantity": 1.0,
+          "days_supply": null,
+          "place_of_service": null
+        },
+        "diagnoses": [
+          "M54.50"
+        ]
+      }
+    },
+    "sources": [
+      {
+        "source_id": "g4_note",
+        "source_type": "DOCUMENT",
+        "pages": [
+          "Synthetic clinical record.\nDiagnosis: M54.50\nBack pain duration: 21 days; date: 2026-10-01\nNeurologic deficit: no; date: 2026-10-01\n"
+        ],
+        "resource": null
+      }
+    ]
+  }
+}

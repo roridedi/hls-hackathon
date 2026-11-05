@@ -1,0 +1,16 @@
+criteria_set_id: glp1_weight
+version: "2026.1"
+applies_to:
+  line: PHARMACY
+  codes: {system: RXNORM_CLASS, values: [GLP1_WEIGHT]}
+auto_approve_eligible: false
+criteria:
+  - id: bmi_threshold
+    description: Synthetic criterion. BMI at or above 30.
+    question: Please provide the measured BMI, unit, measurement date, and supporting record.
+    rule: {evidence_value: {fact_type: bmi, op: gte, value: 30.0, within_days: 180}}
+  - id: lifestyle_program
+    description: Synthetic criterion. Participation in a lifestyle program is documented.
+    question: Please provide documentation of participation in a lifestyle program, including program name and participation dates.
+    rule: {evidence_value: {fact_type: lifestyle_program, op: eq, value: true}}
+logic: {all_of: [bmi_threshold, lifestyle_program]}

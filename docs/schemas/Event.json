@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "Actor": {
+      "additionalProperties": false,
+      "properties": {
+        "actor_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Actor Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ActorKind"
+        },
+        "roles": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Role"
+          },
+          "title": "Roles",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "actor_id",
+        "kind"
+      ],
+      "title": "Actor",
+      "type": "object"
+    },
+    "ActorKind": {
+      "enum": [
+        "HUMAN",
+        "SYSTEM",
+        "AGENT"
+      ],
+      "title": "ActorKind",
+      "type": "string"
+    },
+    "JsonValue": {},
+    "Role": {
+      "enum": [
+        "intake",
+        "nurse_reviewer",
+        "physician_reviewer",
+        "pharmacist_reviewer",
+        "supervisor",
+        "auditor",
+        "admin"
+      ],
+      "title": "Role",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "case_id": {
+      "format": "uuid",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "event_type": {
+      "title": "Event Type",
+      "type": "string"
+    },
+    "actor": {
+      "$ref": "#/$defs/Actor"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "payload": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Payload",
+      "type": "object"
+    },
+    "payload_hash": {
+      "title": "Payload Hash",
+      "type": "string"
+    },
+    "previous_hash": {
+      "title": "Previous Hash",
+      "type": "string"
+    },
+    "event_hash": {
+      "title": "Event Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "case_id",
+    "sequence",
+    "event_type",
+    "actor",
+    "occurred_at",
+    "reason",
+    "payload",
+    "payload_hash",
+    "previous_hash",
+    "event_hash"
+  ],
+  "title": "Event",
+  "type": "object"
+}

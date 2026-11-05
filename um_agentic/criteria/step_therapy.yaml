@@ -1,0 +1,12 @@
+criteria_set_id: step_therapy
+version: "2026.1"
+applies_to:
+  line: PHARMACY
+  codes: {system: RXNORM_CLASS, values: [STEP_DRUG]}
+auto_approve_eligible: true
+criteria:
+  - id: prior_agent_trial
+    description: Synthetic criterion. Prior agent trial of at least 30 days.
+    question: Please reconcile the prior agent trial dates and duration with the pharmacy claims history.
+    rule: {therapy_duration: {drug_class: PRIOR_AGENT, min_days: 30}}
+logic: {all_of: [prior_agent_trial]}

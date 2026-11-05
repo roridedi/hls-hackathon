@@ -1,0 +1,22 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "summary"
+  ],
+  "title": "SummaryOutput",
+  "type": "object"
+}

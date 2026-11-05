@@ -1,0 +1,58 @@
+{
+  "scenario": "G3",
+  "expected": "PEND_CLINICAL_REVIEW",
+  "request": {
+    "channel": "X12",
+    "line_of_business": "PHARMACY",
+    "received_at": "2026-10-30T21:00:00Z",
+    "jurisdiction": "DEFAULT",
+    "payload": {
+      "transaction": "278",
+      "member_token": "member_000001",
+      "service_date": "2026-11-01",
+      "urgency_code": "R",
+      "provider": {
+        "npi": "1234567893",
+        "specialty": "Primary care"
+      },
+      "service": {
+        "code_system": "RXNORM_CLASS",
+        "code": "STEP_DRUG",
+        "quantity": 1.0,
+        "days_supply": 30,
+        "place_of_service": null
+      },
+      "diagnoses": [
+        "E11.9"
+      ]
+    },
+    "sources": [
+      {
+        "source_id": "g3_note",
+        "source_type": "DOCUMENT",
+        "pages": [
+          "Synthetic clinical record.\nPrior agent trial: 90 days; date: 2026-10-01\n"
+        ],
+        "resource": null
+      },
+      {
+        "source_id": "claims_history",
+        "source_type": "CLAIMS",
+        "pages": [],
+        "resource": {
+          "facts": [
+            {
+              "fact_type": "therapy_duration",
+              "normalized_value": {
+                "drug_class": "PRIOR_AGENT",
+                "days": 0
+              },
+              "effective_date": "2026-10-01",
+              "unit": "days"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
